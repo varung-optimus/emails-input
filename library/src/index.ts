@@ -24,27 +24,39 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * =================
      */
 
+    var _removeEmailEntry = (elementToBeRemoved: HTMLElement) => {
+        // remove from registry
+        const value = elementToBeRemoved.getAttribute('data-value');
+        this.emails = this.emails.filter(email => email !== value);
+        elementToBeRemoved.parentElement.remove();
+        console.log(this.emails);
+    };
+
     var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
         var node = document.createElement('span');
         node.className = 'email-text-icon-container';
         if (generatedId) {
             node.innerHTML = `<span class="email-text">${generatedId}</span>`;
+            this.emails.push(generatedId);
         } else {
             node.innerHTML = inputElement.value;
+            this.emails.push(inputElement.value);
             inputElement.value = '';
         }
         // append close icon
         var closeIcon = document.createElement('span');
+        closeIcon.setAttribute('data-value', node.innerText);
         closeIcon.className = 'close-icon';
         closeIcon.innerHTML = '<i class="material-icons">close</i>';
-        closeIcon.onclick = (event) => {
-            debugger
+        closeIcon.onclick = (event: any) => {
+            // get item value
+            var elementToBeRemoved = event.target.parentElement;
+            _removeEmailEntry(elementToBeRemoved);
         };
         node.appendChild(closeIcon);
 
         // append the item to container
         element.insertBefore(node, inputElement);
-        this.emails.push(generatedId);
     };
 
     var _attachEventHandlers = (element: HTMLElement, inputElement: HTMLInputElement) => {
@@ -105,9 +117,15 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * Gets email count
      */
     var getEmailsCount = () => {
-        console.log(this.emails.length);
         return this.emails.length;
     };
+
+    /**
+     * Get emails
+     */
+    var getEmails = () => {
+        return this.emails;
+    }
 
 
     /**
@@ -138,6 +156,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
 
     return {
         addEmail,
-        getEmailsCount
+        getEmailsCount,
+        getEmails
     };
 };
