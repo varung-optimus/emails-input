@@ -24,10 +24,25 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * =================
      */
 
-    var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement) => {
+    var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
         var node = document.createElement('span');
-        node.innerText = inputElement.value;
-        inputElement.value = '';
+        node.className = 'email-text-icon-container';
+        if (generatedId) {
+            node.innerHTML = `<span class="email-text">${generatedId}</span>`;
+        } else {
+            node.innerHTML = inputElement.value;
+            inputElement.value = '';
+        }
+        // append close icon
+        var closeIcon = document.createElement('span');
+        closeIcon.className = 'close-icon';
+        closeIcon.innerHTML = '<i class="material-icons">close</i>';
+        closeIcon.onclick = (event) => {
+            debugger
+        };
+        node.appendChild(closeIcon);
+
+        // append the item to container
         element.insertBefore(node, inputElement);
     };
 
@@ -41,18 +56,25 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         inputElement.onkeypress = (event) => {
             if (props.isEnterEnabled && event && event.keyCode === 13) {
                 // Add item as an email item entry
-                _addEmailEntry(element, inputElement);
+                if (inputElement && inputElement.value) {
+                    _addEmailEntry(element, inputElement);
+                }
                 return false;
             }
             if (props.isCommaEnabled && event && event.keyCode === 44) {
                 // Add item as an email item entry
-                _addEmailEntry(element, inputElement);
+                if (inputElement && inputElement.value) {
+                    _addEmailEntry(element, inputElement);
+                }
                 return false;
             }
         };
 
         inputElement.onblur = (event) => {
             // add item on blur
+            if (inputElement && inputElement.value) {
+                _addEmailEntry(element, inputElement);
+            }
         }
     };
 
@@ -66,9 +88,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         generatedId = `${generatedId}${props.domain}`;
         this.emails.push(generatedId);
 
-        var addedEmail = document.createElement('span');
-        addedEmail.innerText = generatedId;
-        this.emailInputContainer.insertBefore(addedEmail, this.inputElement);
+        _addEmailEntry(this.emailInputContainer, this.inputElement, generatedId);
     };
 
     var getEmailsCount = () => {
