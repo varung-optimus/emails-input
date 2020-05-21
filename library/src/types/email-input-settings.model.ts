@@ -1,11 +1,11 @@
 export class EmailInputSettings {
     // Functionality settings
-    isAddEnabled?: boolean = true;
+    isEnterEnabled?: boolean = true;
     isCommaEnabled?: boolean = true;
     isBlurEnabled?: boolean = true;
     // Styling settings
     textElementClasses?: string;
+    placeholder?: string;
     // Data
-    // TODO: Should be dynamic (i18n compatible)
-    domain?: string = '@miro.com';
+    domain?: string;
 }
