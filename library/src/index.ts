@@ -24,12 +24,10 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * =================
      */
 
-    var _removeEmailEntry = (elementToBeRemoved: HTMLElement) => {
-        // remove from registry
-        const value = elementToBeRemoved.getAttribute('data-value');
+    var _removeEmailEntry = (closeIconElement: HTMLElement) => {
+        const value = closeIconElement.getAttribute('data-value');
         this.emails = this.emails.filter(email => email !== value);
-        elementToBeRemoved.parentElement.remove();
-        console.log(this.emails);
+        closeIconElement.parentElement.remove();
     };
 
     var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
