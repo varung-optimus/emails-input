@@ -23,7 +23,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * Email input initializer
      */
     var _init = () => {
-        console.log(node);
+       node.innerHTML = `<textarea class="${props.textElementClasses}"></textarea>`;
         console.log(props);
     };
 
