@@ -13,6 +13,15 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     this._node = node;
     this._props = props;
 
+    // Public variables
+    textElement: HTMLElement;
+    emails: [];
+
+    // Private variables/consts
+    // TODO: Should be i18n compatible characters
+    const allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+    const defaultSettings: EmailInputSettings = { isAddEnabled: true, isCommaEnabled: true, isBlurEnabled: true, domain: '@miro.com' };
+
     /**
      * ================
      * LIFECYCLE EVENTS
@@ -23,8 +32,12 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * Email input initializer
      */
     var _init = () => {
-       node.innerHTML = `<textarea class="${props.textElementClasses}"></textarea>`;
-        console.log(props);
+        this.emails = [];
+        // append the node
+        node.innerHTML = `<textarea class="${props.textElementClasses}"></textarea>`;
+        this.textElement = node.children[0];
+        // settings
+        props = { ...defaultSettings, ...props };
     };
 
     // Initialize the input-element
@@ -37,8 +50,15 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * =================
      */
     var addEmail = () => {
-        console.log('Adding email ' + node);
-        return '';
+        // Generate random email and append in textarea element
+        var generatedId = '';
+        for (var index = 0; index < 15; index++) {
+            generatedId += allowedChars[Math.floor(Math.random() * allowedChars.length)];
+        }
+
+        generatedId = `${this.textElement.value} ${generatedId}${props.domain}`;
+        this.emails.push(generatedId);
+        this.textElement.value = generatedId;
     }
 
 

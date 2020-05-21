@@ -1,4 +1,4 @@
 export interface EmailInputType {
-    addEmail(): string;
+    addEmail(): void;
     // getEmailsCount(): number;
 }
