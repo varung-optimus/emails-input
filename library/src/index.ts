@@ -16,7 +16,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     // Private variables/consts
     // TODO: Should be i18n compatible characters
     const allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
-    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, domain: '@miro.com', placeholder: 'add more person' };
+    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
 
     /**
      * ================
@@ -44,6 +44,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
 
         // append the item to container
         element.insertBefore(node, inputElement);
+        this.emails.push(generatedId);
     };
 
     var _attachEventHandlers = (element: HTMLElement, inputElement: HTMLInputElement) => {
@@ -70,6 +71,15 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
             }
         };
 
+        // on paste
+        inputElement.onpaste = (event) => {
+            if (event && event.clipboardData) {
+                let paste = (event.clipboardData || (<any>window).clipboardData).getData('text');
+                _addEmailEntry(element, inputElement, paste);
+                return false;
+            }
+        };
+
         inputElement.onblur = (event) => {
             // add item on blur
             if (inputElement && inputElement.value) {
@@ -78,20 +88,24 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         }
     };
 
+    /**
+     * Generate random email
+     */
     var addEmail = () => {
-        // Generate random email and append in textarea element
         var generatedId = '';
         for (var index = 0; index < 15; index++) {
             generatedId += allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
 
         generatedId = `${generatedId}${props.domain}`;
-        this.emails.push(generatedId);
-
         _addEmailEntry(this.emailInputContainer, this.inputElement, generatedId);
     };
 
+    /**
+     * Gets email count
+     */
     var getEmailsCount = () => {
+        console.log(this.emails.length);
         return this.emails.length;
     };
 
