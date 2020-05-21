@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "es2015",
+    "target": "es5",
+    "declaration": true,
+    "outDir": "./dist",
+    "lib": [
+      "DOM",
+      "ES5",
+      "ScriptHost"
+    ]
+  },
+  "include": [
+    "src/**/*"
+  ]
+}

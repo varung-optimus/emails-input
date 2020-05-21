@@ -1,0 +1,17 @@
+{
+  "name": "varun-poc-emails-input",
+  "version": "0.0.7",
+  "description": "Can log \"hello world\" and \"goodbye world\" to the console!",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "2.1.6"
+  },
+  "dependencies": {},
+  "types": "dist/index.d.ts"
+}
