@@ -1,23 +1,48 @@
+import { EmailInputSettings } from './types/email-input-settings.model';
 import { EmailInputType } from './types/email-input.model';
 
 /**
  * Element Input module
  * ==
  * Exports major functionality to other modules
+ * @param {html DOM element} node
+ * @param {properties} props
  */
-var EmailInput = (function (): EmailInputType {
-    var addEmail = (): string => {
-        console.log('Adding Email');
+
+var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailInputType {
+    this._node = node;
+    this._props = props;
+
+    /**
+     * ================
+     * LIFECYCLE EVENTS
+     * =================
+     */
+
+    /**
+     * Email input initializer
+     */
+    var _init = () => {
+        console.log(node);
+        console.log(props);
+    };
+
+    // Initialize the input-element
+    _init();
+
+
+    /**
+     * ================
+     * Methods
+     * =================
+     */
+    var addEmail = () => {
+        console.log('Adding email ' + node);
         return '';
     }
 
-    var getEmailsCount = (): number => {
-        console.log('Get emails count');
-        return 0;
-    }
 
     return {
-        addEmail,
-        getEmailsCount
-    }
-})();
+        addEmail
+    };
+};
