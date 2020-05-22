@@ -41,7 +41,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
             this.emails.push(inputElement.value);
             inputElement.value = '';
             const isEmailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(inputElement.value);
-            node.className = !isEmailValid ? 'invalid-email': '';
+            node.className = !isEmailValid ? 'invalid-email' : '';
         }
         // append close icon
         var closeIcon = document.createElement('span');
@@ -86,8 +86,13 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         // on paste
         inputElement.onpaste = (event) => {
             if (event && event.clipboardData) {
-                let paste = (event.clipboardData || (<any>window).clipboardData).getData('text');
-                _addEmailEntry(element, inputElement, paste);
+                let pasteData = (event.clipboardData || (<any>window).clipboardData).getData('text');
+                let pastedEmails = pasteData ? pasteData.split(',') : [];
+                if (pastedEmails.length > 0) {
+                    for (let email of pastedEmails) {
+                        _addEmailEntry(element, inputElement, email);
+                    }
+                }
                 return false;
             }
         };
