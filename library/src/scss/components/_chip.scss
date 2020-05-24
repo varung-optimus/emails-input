@@ -1,11 +1,11 @@
 .email-input-container {
     .email-text-icon-container {
         padding: 5px 10px;
-        border: 1px solid $chip-border-color;
-        border-radius: 0.75em;
+        border-radius: $chip-border-radius;
         background-color: $chip-background;
-        display: inline-block;
+        display: initial;
         margin: 3px;
+        font-size: $chip-text-font-size;
     }
 
     .invalid-email {

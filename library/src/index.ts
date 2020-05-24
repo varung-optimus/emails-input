@@ -80,7 +80,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
             const emailValidityClass = emailRegex.test(value) ? 'email-text-icon-container' : 'invalid-email';
 
             // set the value of DOM and registry
-            node.innerHTML = value;
+            node.innerHTML = `<span>${value}</span>`;
             node.className = emailValidityClass;
             this.emails.push(value);
 

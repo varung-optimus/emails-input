@@ -1,11 +1,13 @@
 // Colors
 $container-background: #fff;
-$chip-background: #c4e1ff;
+$chip-background: rgba(102, 153, 255, 0.2);
 $chip-border-color: #eee;
 $invalid-chip-border-color: red;
 
 // Height/width
 $input-container-height: 200px;
+$chip-border-radius: 100px;
 
 // Font sizes
 $close-icon-font-size: 20px;
+$chip-text-font-size: 14px;
