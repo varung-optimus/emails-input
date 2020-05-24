@@ -31,6 +31,17 @@ $ npm i emails-input
 
 <h3> Code Demo </h3>
 
+Load the script
+```javascript
+<script type="text/javascript" src="node_modules/emails-input/dist/main.js"></script>
+```
+
+e.g. If you want to use emails-input with below element - `emails-input`
+
+```html
+<div id="emails-input"></div>
+```
+
 ```javascript
 
 var emailInput = new EmailInput(document.getElementById('emails-input'), { textElementClasses: 'form-control', domain: '@miro.com' });
