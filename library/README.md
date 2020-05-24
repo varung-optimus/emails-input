@@ -1,3 +1,5 @@
+<p align="center"><img src="demo.png" /></p>
+
 <h1 align="center"> Email Input </h1>
 
 <p align="center"> Emails input component to allow users to be able to create fancy chip style email input </p>
