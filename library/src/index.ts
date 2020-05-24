@@ -287,4 +287,4 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
 };
 
 // attach to the document
-(<any>document).EmailInput = EmailInput;
+(<any>window).EmailInput = EmailInput;
