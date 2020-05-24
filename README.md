@@ -1,4 +1,4 @@
-<p align="center"><img src="demo.png" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/varung-optimus/emails-input/develop/demo.png" /></p>
 
 <h1 align="center"> Email Input </h1>
 
@@ -8,9 +8,20 @@
 
 <p> Emails input component to allow users to be able to create fancy chip style email input </p>
 
+<h3> Demo -> Show me what you got </h3>
+
+<a href="https://varung-optimus.github.io/"> Demo Link </a>
+
+<h3> Download & Installation </h3>
+
+```shell
+$ npm i emails-input
+```
+
 <h3> List of features </h3>
 
 <ul>
+  <li> Supported on: <img width="70px" src="https://miro.medium.com/max/3408/1*wOZwg0CzSPtzTEDBlZhaEQ.png" /></li>
   <li>Easily create a chip style email input in vanilla project</li>
   <li>Quick & Easy installation using npm</li>
   <li>Customizable events to create chip - blur, enter, comma, space</li>
@@ -18,13 +29,13 @@
   <li>Subscribe/Listen to value changes of the input</li>
 </ul>
 
-<h3> Demo -> Show me what you got </h3>
-
-<a href="#"> Link 1 </a>
-
-<a href="#"> Link 2 </a>
-
 <h3> Code Demo </h3>
+
+e.g. If you want to use emails-input with below element - `emails-input`
+
+```html
+<div id="emails-input"></div>
+```
 
 ```javascript
 
@@ -39,11 +50,6 @@ emailInput.replaceEmails(['something@something.com', 'me@me.com', 'do@something.
 
 ```
 
-<h3> Download & Installation </h3>
-
-```shell
-$ npm i emails-input
-```
 <h3>Contributing</h3>
 Keep it simple. Keep it minimal. Don't put every single feature just because you can.
 
