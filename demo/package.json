@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "varun-poc-emails-input": "^0.0.7"
+    "emails-input": "0.0.1"
   }
 }

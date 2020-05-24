@@ -1,7 +1,7 @@
 {
-  "name": "varun-poc-emails-input",
-  "version": "0.0.7",
-  "description": "Can log \"hello world\" and \"goodbye world\" to the console!",
+  "name": "emails-input",
+  "version": "0.0.1",
+  "description": "Emails input component to allow users to be able to create fancy chip style email input",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --mode development",
