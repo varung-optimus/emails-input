@@ -5,21 +5,23 @@
         background-color: $chip-background;
         display: initial;
         margin: 3px;
-        font-size: $chip-text-font-size;
+        font-size: $font-size-sm;
     }
 
     .invalid-email {
         border-bottom: 1px dashed $invalid-chip-border-color;
         margin: 3px 5px;
+        font-size: $font-size-sm;
     }
 
     .close-icon {
         border-color: transparent;
 
         .material-icons {
-            font-size: $close-icon-font-size;
-            transform: translate(5px, 5px);
+            font-size: $remove-icon-font-size;
+            transform: translate(5px, 2px);
             cursor: pointer;
+            color: $remove-icon-color;
         }
     }
 }
