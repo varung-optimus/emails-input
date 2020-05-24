@@ -16,9 +16,9 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     // Private variables/consts
     // TODO: Should be i18n compatible characters
     const allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
+    const generatedEmailLength = 15;
     const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, isSpaceEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
     /**
      * ================
      * Methods
@@ -155,7 +155,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      */
     const addEmail = () => {
         var generatedId = '';
-        for (var index = 0; index < 15; index++) {
+        for (var index = 0; index < generatedEmailLength; index++) {
             generatedId += allowedChars[Math.floor(Math.random() * allowedChars.length)];
         }
 
@@ -184,7 +184,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      */
     const replaceEmails = (newEmails: string[]) => {
         var emails = this._node.querySelectorAll('.email-text-icon-container');
-        
+
         // Remove existing emails (if any)
         for (let email of emails) {
             email.remove();
@@ -217,8 +217,8 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         node.innerHTML = `<div class="email-input-container">
             <input type="text" placeholder="${props.placeholder}" />
         </div>`;
-        this.emailInputContainer = node.children[0];
-        this.inputElement = node.children[0].children[0];
+        this.emailInputContainer = node.querySelector('.email-input-container');
+        this.inputElement = node.querySelector('input[type="text"');
 
         _attachEventHandlers(this.emailInputContainer, this.inputElement);
     };
