@@ -1,0 +1,10 @@
+.email-input-container input {
+    border-color: transparent;
+    outline: none;
+    display: inline;
+    font-size: $font-size-sm;
+
+    &::placeholder {
+        color: $input-placeholder-color;
+    }
+}

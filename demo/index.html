@@ -1,9 +1,40 @@
 <html>
-    <head>
-        <title>Miro - Emails Input</title>
-        <script type="text/javascript" src="node_modules/varun-poc-emails-input/dist/index.js"></script>
-        <script>
-            EmailInput.addEmail();
-        </script>
-    </head>
+
+<head>
+    <title>Miro - Emails Input</title>
+    <!-- Bootstrap to load demo page styles (independent of library styles) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Demo css for page styling (independent of library input styles) -->
+    <link rel="stylesheet" href="demo.css" />
+
+    <!-- Load library -->
+    <script type="text/javascript" src="node_modules/emails-input/dist/main.js"></script>
+</head>
+<div>
+    <div class="bg-light item-container">
+        <h5 class="container-title m-0">Share <strong>Board name</strong> with others</h5>
+        <div id="emails-input"></div>
+    </div>
+    <div class="item-container">
+        <button type="button" onclick="emailInput.addEmail()" class="btn btn-primary btn-demo">Add email</button>
+        <button type="button" onclick="emailInput.getEmailsCount()" class="ml-2 btn btn-primary btn-demo">Get emails
+            count</button>
+        <button type="button" onclick="emailInput.getEmails()" class="ml-2 btn btn-primary btn-demo">Get emails</button>
+    </div>
+
+</div>
+
+<script>
+    var emailInput = new EmailInput(document.getElementById('emails-input'), { textElementClasses: 'form-control', domain: '@miro.com' });
+    emailInput.listenToChanges(function() {
+        console.log('listened');
+    });
+    emailInput.addEmail();
+    emailInput.addEmail();
+    emailInput.addEmail();
+    emailInput.replaceEmails(['something@something.com', 'me@me.com', 'do@something.com']);
+</script>
+
 </html>
