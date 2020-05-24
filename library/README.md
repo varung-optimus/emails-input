@@ -33,6 +33,11 @@ $ npm i emails-input
 
 e.g. If you want to use emails-input with below element - `emails-input`
 
+Load the script
+```javascript
+<script type="text/javascript" src="node_modules/emails-input/dist/main.js"></script>
+```
+
 ```html
 <div id="emails-input"></div>
 ```
