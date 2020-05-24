@@ -1,4 +1,7 @@
 export interface EmailInputType {
-    addEmail(): string;
+    addEmail(): void;
     getEmailsCount(): number;
+    getEmails(): string[];
+    replaceEmails(emails: string[]): void;
+    listenToChanges(callback: Function): void;
 }
