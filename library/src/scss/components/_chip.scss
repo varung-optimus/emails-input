@@ -1,0 +1,25 @@
+.email-input-container {
+    .email-text-icon-container {
+        padding: 5px 10px;
+        border: 1px solid $chip-border-color;
+        border-radius: 0.75em;
+        background-color: $chip-background;
+        display: inline-block;
+        margin: 3px;
+    }
+
+    .invalid-email {
+        border-bottom: 1px dashed $invalid-chip-border-color;
+        margin: 3px 5px;
+    }
+
+    .close-icon {
+        border-color: transparent;
+
+        .material-icons {
+            font-size: $close-icon-font-size;
+            transform: translate(5px, 5px);
+            cursor: pointer;
+        }
+    }
+}

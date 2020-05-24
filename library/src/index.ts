@@ -1,5 +1,6 @@
 import { EmailInputSettings } from './types/email-input-settings.model';
 import { EmailInputType } from './types/email-input.model';
+import './scss/main.scss'
 declare var Proxy: any;
 
 /**
