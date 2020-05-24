@@ -16,7 +16,8 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     // Private variables/consts
     // TODO: Should be i18n compatible characters
     const allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
-    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
+    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, isSpaceEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
+    const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     /**
      * ================
@@ -24,39 +25,71 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * =================
      */
 
-    var _removeEmailEntry = (closeIconElement: HTMLElement) => {
-        const value = closeIconElement.getAttribute('data-value');
+    /**
+     * Removes the element from registry array and removes from DOM
+     * @param removeIconElement Receives the span element of remove icon
+     */
+    var _removeEmailEntry = (removeIconElement: HTMLElement) => {
+        const value = removeIconElement.getAttribute('data-value');
+        // remove from registry
         this.emails = this.emails.filter(email => email !== value);
-        closeIconElement.parentElement.remove();
+        // remove from DOM
+        removeIconElement.parentElement.remove();
     };
 
-    var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
-        var node = document.createElement('span');
-        node.className = 'email-text-icon-container';
-        if (generatedId) {
-            node.innerHTML = `<span class="email-text">${generatedId}</span>`;
-            this.emails.push(generatedId);
-        } else {
-            node.innerHTML = inputElement.value;
-            this.emails.push(inputElement.value);
-            const isEmailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(inputElement.value);
-            node.className = !isEmailValid ? 'invalid-email' : 'email-text-icon-container';
-            inputElement.value = '';
-        }
-        // append close icon
-        var closeIcon = document.createElement('span');
-        closeIcon.setAttribute('data-value', node.innerText);
-        closeIcon.className = 'close-icon';
-        closeIcon.innerHTML = '<i class="material-icons">close</i>';
-        closeIcon.onclick = (event: any) => {
+    /**
+     * Adds remove icon to the newly added node
+     * @param node New node getting added to the DOM
+     */
+    var _addRemoveIcon = (node) => {
+        // create remove icon and set initial config
+        var removeIcon = document.createElement('span');
+        removeIcon.setAttribute('data-value', node.innerText);
+        removeIcon.className = 'close-icon';
+        removeIcon.innerHTML = '<i class="material-icons">close</i>';
+
+        // attach onclick handler for remove icon
+        removeIcon.onclick = (event: any) => {
             // get item value
             var elementToBeRemoved = event.target.parentElement;
             _removeEmailEntry(elementToBeRemoved);
         };
-        node.appendChild(closeIcon);
 
-        // append the item to container
+        // append the icon to new node
+        node.appendChild(removeIcon);
+    }
+
+    /**
+     * Adds email entry to the element container
+     * @param element element container instance
+     * @param inputElement input element instance within the element container
+     * @param generatedId optional param for generated ID string - if not passed then use input element value
+     */
+    var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
+        // create a new node
+        var node = document.createElement('span');
+
+        // set value from either generated ID or inputElement value
+        const value = generatedId ? generatedId : inputElement.value;
+
+        // check if value is invalid/invalid
+        const emailValidityClass = emailRegex.test(value) ? 'email-text-icon-container' : 'invalid-email';
+
+        // set the value of DOM and registry
+        node.innerHTML = value;
+        node.className = emailValidityClass;
+        this.emails.push(value);
+
+        // Add remove icon to the new node
+        _addRemoveIcon(node);
+
+        // Add the node before the input element
         element.insertBefore(node, inputElement);
+
+        // reset the input element state
+        if (!generatedId) {
+            inputElement.value = '';
+        }
     };
 
     var _attachEventHandlers = (element: HTMLElement, inputElement: HTMLInputElement) => {
@@ -68,6 +101,13 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         // listen to ENTER and COMMA
         inputElement.onkeypress = (event) => {
             if (props.isEnterEnabled && event && event.keyCode === 13) {
+                // Add item as an email item entry
+                if (inputElement && inputElement.value) {
+                    _addEmailEntry(element, inputElement);
+                }
+                return false;
+            }
+            if (props.isSpaceEnabled && event && event.keyCode === 32) {
                 // Add item as an email item entry
                 if (inputElement && inputElement.value) {
                     _addEmailEntry(element, inputElement);
