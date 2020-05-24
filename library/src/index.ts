@@ -39,9 +39,9 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         } else {
             node.innerHTML = inputElement.value;
             this.emails.push(inputElement.value);
-            inputElement.value = '';
             const isEmailValid = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(inputElement.value);
-            node.className = !isEmailValid ? 'invalid-email' : '';
+            node.className = !isEmailValid ? 'invalid-email' : 'email-text-icon-container';
+            inputElement.value = '';
         }
         // append close icon
         var closeIcon = document.createElement('span');
