@@ -37,7 +37,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         // remove from registry
         this.emails = this.emails.filter(email => email !== value);
         // remove from DOM
-        removeIconElement.parentElement.remove();
+        removeIconElement.parentElement.parentElement.outerHTML = ''; //.remove();
     };
 
     /**

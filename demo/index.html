@@ -28,7 +28,7 @@
 
 <script>
     var emailInput = new EmailInput(document.getElementById('emails-input'), { textElementClasses: 'form-control', domain: '@miro.com' });
-    emailInput.listenToChanges(() => {
+    emailInput.listenToChanges(function() {
         console.log('listened');
     });
     emailInput.addEmail();
