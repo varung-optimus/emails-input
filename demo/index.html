@@ -37,4 +37,27 @@
     emailInput.replaceEmails(['something@something.com', 'me@me.com', 'do@something.com']);
 </script>
 
+<div>
+    <div class="bg-light item-container">
+        <h5 class="container-title m-0">Share <strong>Board name 2</strong> with others</h5>
+        <div id="emails-input2"></div>
+    </div>
+    <div class="item-container">
+        <button type="button" onclick="emailInput2.addEmail()" class="btn btn-primary btn-demo">Add email</button>
+        <button type="button" onclick="emailInput2.getEmailsCount()" class="ml-2 btn btn-primary btn-demo">Get emails
+            count</button>
+        <button type="button" onclick="emailInput2.getEmails()" class="ml-2 btn btn-primary btn-demo">Get emails</button>
+    </div>
+
+</div>
+
+<script>
+    var emailInput2 = new EmailInput(document.getElementById('emails-input2'), { textElementClasses: 'form-control', domain: '@miro.com' });
+    emailInput2.listenToChanges(function() {
+        console.log('listened');
+    });
+    emailInput2.addEmail();
+    emailInput2.addEmail();
+    emailInput2.addEmail();
+</script>
 </html>

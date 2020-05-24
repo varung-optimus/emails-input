@@ -21,6 +21,7 @@ $ npm i emails-input
 <h3> List of features </h3>
 
 <ul>
+  <li> Supported on: <img width="70px" src="https://miro.medium.com/max/3408/1*wOZwg0CzSPtzTEDBlZhaEQ.png" /></li>
   <li>Easily create a chip style email input in vanilla project</li>
   <li>Quick & Easy installation using npm</li>
   <li>Customizable events to create chip - blur, enter, comma, space</li>
@@ -29,6 +30,17 @@ $ npm i emails-input
 </ul>
 
 <h3> Code Demo </h3>
+
+Load the script
+```javascript
+<script type="text/javascript" src="node_modules/emails-input/dist/main.js"></script>
+```
+
+e.g. If you want to use emails-input with below element - `emails-input`
+
+```html
+<div id="emails-input"></div>
+```
 
 ```javascript
 
