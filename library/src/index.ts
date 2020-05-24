@@ -29,7 +29,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * Removes the element from registry array and removes from DOM
      * @param removeIconElement Receives the span element of remove icon
      */
-    var _removeEmailEntry = (removeIconElement: HTMLElement) => {
+    const _removeEmailEntry = (removeIconElement: HTMLElement) => {
         const value = removeIconElement.getAttribute('data-value');
         // remove from registry
         this.emails = this.emails.filter(email => email !== value);
@@ -41,7 +41,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * Adds remove icon to the newly added node
      * @param node New node getting added to the DOM
      */
-    var _addRemoveIcon = (node) => {
+    const _addRemoveIcon = (node) => {
         // create remove icon and set initial config
         var removeIcon = document.createElement('span');
         removeIcon.setAttribute('data-value', node.innerText);
@@ -65,7 +65,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * @param inputElement input element instance within the element container
      * @param generatedId optional param for generated ID string - if not passed then use input element value
      */
-    var _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
+    const _addEmailEntry = (element: HTMLElement, inputElement: HTMLInputElement, generatedId?: string) => {
         // create a new node
         var node = document.createElement('span');
 
@@ -92,7 +92,12 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         }
     };
 
-    var _attachEventHandlers = (element: HTMLElement, inputElement: HTMLInputElement) => {
+    /**
+     * Attach events
+     * @param element main container element
+     * @param inputElement input element within the container element
+     */
+    const _attachEventHandlers = (element: HTMLElement, inputElement: HTMLInputElement) => {
         // click event for container
         element.onclick = () => {
             inputElement.focus();
@@ -148,7 +153,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     /**
      * Generate random email
      */
-    var addEmail = () => {
+    const addEmail = () => {
         var generatedId = '';
         for (var index = 0; index < 15; index++) {
             generatedId += allowedChars[Math.floor(Math.random() * allowedChars.length)];
@@ -161,16 +166,38 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     /**
      * Gets email count
      */
-    var getEmailsCount = () => {
+    const getEmailsCount = () => {
         return this.emails.length;
     };
 
     /**
      * Get emails
      */
-    var getEmails = () => {
+    const getEmails = () => {
         return this.emails;
-    }
+    };
+
+
+    /**
+     * Replace existing emails with the new list
+     * @param newEmails new emails list to be added
+     */
+    const replaceEmails = (newEmails: string[]) => {
+        var emails = this._node.querySelectorAll('.email-text-icon-container');
+        
+        // Remove existing emails (if any)
+        for (let email of emails) {
+            email.remove();
+        }
+
+        // Add new emails
+        for (let email of newEmails) {
+            _addEmailEntry(this.emailInputContainer, this.inputElement, email);
+        }
+
+        // Update the registry
+        this.emails = newEmails;
+    };
 
 
     /**
@@ -182,7 +209,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     /**
      * Email input initializer
      */
-    var _init = () => {
+    const _init = () => {
         this.emails = [];
         // settings
         props = { ...defaultSettings, ...props };
@@ -202,6 +229,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     return {
         addEmail,
         getEmailsCount,
-        getEmails
+        getEmails,
+        replaceEmails
     };
 };
