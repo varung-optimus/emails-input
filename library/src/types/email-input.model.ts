@@ -3,4 +3,5 @@ export interface EmailInputType {
     getEmailsCount(): number;
     getEmails(): string[];
     replaceEmails(emails: string[]): void;
+    listenToChanges(callback: Function): void;
 }

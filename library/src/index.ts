@@ -1,5 +1,6 @@
 import { EmailInputSettings } from './types/email-input-settings.model';
 import { EmailInputType } from './types/email-input.model';
+declare var Proxy: any;
 
 /**
  * Element Input module
@@ -19,6 +20,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     const generatedEmailLength = 15;
     const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, isSpaceEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
     /**
      * ================
      * Methods
@@ -152,6 +154,24 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         }
     };
 
+    const _initProxy = (callback: Function) => {
+        this.emails = new Proxy(this.emails, {
+            set(target, propKey, value) {
+                const oldValue = target[propKey];
+
+                target[propKey] = value;
+
+                // trigger change only if there is change in property - length
+                // proxy gets triggered for all changes
+                if (propKey === 'length') {
+                    callback();
+                }
+
+                return true;
+            }
+        });
+    }
+
     /**
      * Generate random email
      */
@@ -207,6 +227,23 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         this.emails = newEmails;
     };
 
+    /**
+     * Listener for value changes to email input
+     * @param callback Callback to invoke when there is value changes
+     */
+    const listenToChanges = (callback: Function) => {
+        // support for old browsers - depecrated now
+        if (Object && (<any>Object).observe) {
+            (<any>Object).observe(this.emails, callback);
+        }
+
+        // Proxy supported
+        if (('Proxy' in window)) {
+            _initProxy(callback);
+            return;
+        }
+    }
+
 
     /**
      * ================
@@ -243,6 +280,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         addEmail,
         getEmailsCount,
         getEmails,
-        replaceEmails
+        replaceEmails,
+        listenToChanges
     };
 };
