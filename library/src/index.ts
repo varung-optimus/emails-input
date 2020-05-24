@@ -154,11 +154,13 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         }
     };
 
+    /**
+     * Initializes the proxy to be able to listen to change event
+     * @param callback callback method to be invoked on change of value
+     */
     const _initProxy = (callback: Function) => {
         this.emails = new Proxy(this.emails, {
             set(target, propKey, value) {
-                const oldValue = target[propKey];
-
                 target[propKey] = value;
 
                 // trigger change only if there is change in property - length
