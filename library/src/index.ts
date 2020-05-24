@@ -186,7 +186,6 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         generatedId = `${generatedId}${props.domain}`;
         _addEmailEntry(this.emailInputContainer, this.inputElement, generatedId);
     };
-
     /**
      * Gets valid email count
      */
@@ -262,8 +261,8 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         props = { ...defaultSettings, ...props };
         // append the node
         node.innerHTML = `<div class="email-input-container">
-            <input type="text" placeholder="${props.placeholder}" />
-        </div>`;
+                <input type="text" placeholder="${props.placeholder}" />
+            </div>`;
         this.emailInputContainer = node.querySelector('.email-input-container');
         this.inputElement = node.querySelector('input[type="text"');
 
@@ -286,3 +285,6 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         listenToChanges
     };
 };
+
+// attach to the document
+(<any>document).EmailInput = EmailInput;
