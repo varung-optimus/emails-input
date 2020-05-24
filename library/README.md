@@ -21,7 +21,7 @@ $ npm i emails-input
 <h3> List of features </h3>
 
 <ul>
-  <li> Supported on: <img src="https://miro.medium.com/max/3408/1*wOZwg0CzSPtzTEDBlZhaEQ.png" /></li>
+  <li> Supported on: <img width="70px" src="https://miro.medium.com/max/3408/1*wOZwg0CzSPtzTEDBlZhaEQ.png" /></li>
   <li>Easily create a chip style email input in vanilla project</li>
   <li>Quick & Easy installation using npm</li>
   <li>Customizable events to create chip - blur, enter, comma, space</li>
