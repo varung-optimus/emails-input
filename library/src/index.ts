@@ -37,7 +37,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         // remove from registry
         this.emails = this.emails.filter(email => email !== value);
         // remove from DOM
-        removeIconElement.parentElement.remove();
+        removeIconElement.parentElement.outerHTML = '';
     };
 
     /**
@@ -213,12 +213,11 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
      * @param newEmails new emails list to be added
      */
     const replaceEmails = (newEmails: string[]) => {
-        var emails = this._node.querySelectorAll('.email-text-icon-container');
+        let inputElement = this.inputElement;
 
         // Remove existing emails (if any)
-        for (let email of emails) {
-            email.remove();
-        }
+        this._node.querySelector('.email-input-container').innerHTML = '';
+        this._node.querySelector('.email-input-container').appendChild(inputElement);
 
         // Add new emails
         for (let email of newEmails) {
