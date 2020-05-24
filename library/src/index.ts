@@ -72,23 +72,25 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         // set value from either generated ID or inputElement value
         const value = generatedId ? generatedId : inputElement.value;
 
-        // check if value is invalid/invalid
-        const emailValidityClass = emailRegex.test(value) ? 'email-text-icon-container' : 'invalid-email';
+        if (value && value !== '') {
+            // check if value is invalid/invalid
+            const emailValidityClass = emailRegex.test(value) ? 'email-text-icon-container' : 'invalid-email';
 
-        // set the value of DOM and registry
-        node.innerHTML = value;
-        node.className = emailValidityClass;
-        this.emails.push(value);
+            // set the value of DOM and registry
+            node.innerHTML = value;
+            node.className = emailValidityClass;
+            this.emails.push(value);
 
-        // Add remove icon to the new node
-        _addRemoveIcon(node);
+            // Add remove icon to the new node
+            _addRemoveIcon(node);
 
-        // Add the node before the input element
-        element.insertBefore(node, inputElement);
+            // Add the node before the input element
+            element.insertBefore(node, inputElement);
 
-        // reset the input element state
-        if (!generatedId) {
-            inputElement.value = '';
+            // reset the input element state
+            if (!generatedId) {
+                inputElement.value = '';
+            }
         }
     };
 
@@ -135,7 +137,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
                 let pastedEmails = pasteData ? pasteData.split(',') : [];
                 if (pastedEmails.length > 0) {
                     for (let email of pastedEmails) {
-                        _addEmailEntry(element, inputElement, email);
+                        _addEmailEntry(element, inputElement, email.trim());
                     }
                 }
                 return false;
@@ -226,6 +228,11 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     // Initialize the input-element
     _init();
 
+    /**
+     * ================
+     * EXPOSED API METHODS
+     * =================
+     */
     return {
         addEmail,
         getEmailsCount,
