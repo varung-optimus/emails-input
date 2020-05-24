@@ -1,5 +1,6 @@
 import { EmailInputSettings } from './types/email-input-settings.model';
 import { EmailInputType } from './types/email-input.model';
+import './scss/main.scss'
 declare var Proxy: any;
 
 /**
@@ -18,7 +19,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     // TODO: Should be i18n compatible characters
     const allowedChars = 'abcdefghijklmnopqrstuvwxyz1234567890';
     const generatedEmailLength = 15;
-    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, isSpaceEnabled: true, domain: '@miro.com', placeholder: 'add more people' };
+    const defaultSettings: EmailInputSettings = { isEnterEnabled: true, isCommaEnabled: true, isBlurEnabled: true, isSpaceEnabled: true, domain: '@miro.com', placeholder: 'add more people...' };
     const emailRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
     /**
@@ -79,7 +80,7 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
             const emailValidityClass = emailRegex.test(value) ? 'email-text-icon-container' : 'invalid-email';
 
             // set the value of DOM and registry
-            node.innerHTML = value;
+            node.innerHTML = `<span>${value}</span>`;
             node.className = emailValidityClass;
             this.emails.push(value);
 
@@ -186,7 +187,6 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         generatedId = `${generatedId}${props.domain}`;
         _addEmailEntry(this.emailInputContainer, this.inputElement, generatedId);
     };
-
     /**
      * Gets valid email count
      */
@@ -262,8 +262,8 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         props = { ...defaultSettings, ...props };
         // append the node
         node.innerHTML = `<div class="email-input-container">
-            <input type="text" placeholder="${props.placeholder}" />
-        </div>`;
+                <input type="text" placeholder="${props.placeholder}" />
+            </div>`;
         this.emailInputContainer = node.querySelector('.email-input-container');
         this.inputElement = node.querySelector('input[type="text"');
 
@@ -286,3 +286,6 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
         listenToChanges
     };
 };
+
+// attach to the document
+(<any>window).EmailInput = EmailInput;

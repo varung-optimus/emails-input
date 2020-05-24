@@ -1,0 +1,10 @@
+.email-input-container {
+    width: 100%;
+    height: $input-container-height;
+    border: 1px solid #eee;
+    border-radius: 0.5em;
+    cursor: text;
+    background: $container-background;
+    padding: 5px;
+    overflow-y: scroll;
+}
