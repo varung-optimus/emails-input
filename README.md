@@ -1,4 +1,4 @@
-<p align="center"><img src="demo.png" /></p>
+<p align="center"><img src="https://raw.githubusercontent.com/varung-optimus/emails-input/develop/demo.png" /></p>
 
 <h1 align="center"> Email Input </h1>
 
@@ -7,6 +7,16 @@
 <hr/>
 
 <p> Emails input component to allow users to be able to create fancy chip style email input </p>
+
+<h3> Demo -> Show me what you got </h3>
+
+<a href="https://varung-optimus.github.io/"> Demo Link </a>
+
+<h3> Download & Installation </h3>
+
+```shell
+$ npm i emails-input
+```
 
 <h3> List of features </h3>
 
@@ -17,12 +27,6 @@
   <li>Ability to replace/copy the existing long list to the input</li>
   <li>Subscribe/Listen to value changes of the input</li>
 </ul>
-
-<h3> Demo -> Show me what you got </h3>
-
-<a href="#"> Link 1 </a>
-
-<a href="#"> Link 2 </a>
 
 <h3> Code Demo </h3>
 
@@ -39,11 +43,6 @@ emailInput.replaceEmails(['something@something.com', 'me@me.com', 'do@something.
 
 ```
 
-<h3> Download & Installation </h3>
-
-```shell
-$ npm i emails-input
-```
 <h3>Contributing</h3>
 Keep it simple. Keep it minimal. Don't put every single feature just because you can.
 

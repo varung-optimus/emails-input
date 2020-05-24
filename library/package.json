@@ -1,6 +1,6 @@
 {
   "name": "emails-input",
-  "version": "0.0.1",
+  "version": "0.0.6",
   "description": "Emails input component to allow users to be able to create fancy chip style email input",
   "main": "index.js",
   "scripts": {
