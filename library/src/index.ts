@@ -166,10 +166,16 @@ var EmailInput = function (node: HTMLElement, props: EmailInputSettings): EmailI
     };
 
     /**
-     * Gets email count
+     * Gets valid email count
      */
     const getEmailsCount = () => {
-        return this.emails.length;
+        let validEmailsCount = 0;
+        for (let email of this.emails) {
+            if (emailRegex.test(email)) {
+                validEmailsCount++;
+            }
+        }
+        return validEmailsCount;
     };
 
     /**
